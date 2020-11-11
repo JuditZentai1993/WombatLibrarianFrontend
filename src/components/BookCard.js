@@ -1,5 +1,7 @@
 import React from "react";
 import img_not_found from "../img_not_found.png";
+import Rater from 'react-rater'
+import 'react-rater/lib/react-rater.css'
 
 export default function BookCard(props) {
   const createAuthorsDisplay = () => {
@@ -37,14 +39,20 @@ export default function BookCard(props) {
       <div className="card-book-text-container">
         <p className="card-book-name">{props.book.volumeInfo.title}</p>
         <p className="card-book-author">{authorsToDisplay}</p>
-        <p className="card-book-page">
+        {/* <p className="card-book-page">
           Page: {props.book.volumeInfo.pageCount}
+        </p> */}
+        <p className="card-book-page">
+          {typeof props.book.volumeInfo.pageCount !== "undefined" ? (
+            <p>
+              {props.book.volumeInfo.pageCount} pages
+            </p>
+          ) : null}
         </p>
         <p className="card-book-rating">
           {typeof props.book.volumeInfo.ratingsCount !== "undefined" ? (
             <p>
-              Rating: {props.book.volumeInfo.averageRating} by (
-              {props.book.volumeInfo.ratingsCount} user)
+              <Rater total={5} rating={props.book.volumeInfo.averageRating} interactive={false} /> ({props.book.volumeInfo.ratingsCount})
             </p>
           ) : null}
         </p>

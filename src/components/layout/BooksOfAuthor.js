@@ -25,7 +25,7 @@ function BooksOfAuthor(props) {
         props.books
             .map(book => 
                 <div>
-                <BookCard book={book} />
+                <BookCard book={book} key={book.id} />
                 <button onClick={() => {addToBookshelf(book)}}>Add to Bookshelf</button>
                 </div>)
     )
