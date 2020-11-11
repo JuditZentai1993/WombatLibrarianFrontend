@@ -29,7 +29,7 @@ function App() {
         <Route path="/authordetails/:id">
           <AuthorDetails />
         </Route>
-        <Route path="/search">
+        <Route path="/search/:searchTerm">
           <SearchResult />
         </Route>
       </Router>
