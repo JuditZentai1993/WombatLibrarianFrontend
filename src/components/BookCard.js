@@ -2,6 +2,23 @@ import React from "react";
 import img_not_found from "../img_not_found.png";
 
 export default function BookCard(props) {
+  const createAuthorsDisplay = () => {
+    const authors = props.book.volumeInfo.authors;
+    if (authors.length === 1) return authors[0]
+    else {
+      let authorsToDisplay = "";
+      for (let author of authors) {
+        authorsToDisplay += author + ", "
+      }
+      authorsToDisplay = authorsToDisplay.slice(0, (authorsToDisplay.length - 2));
+      const authorDisplayLimit = 35
+      if (authorsToDisplay.length < authorDisplayLimit) return authorsToDisplay
+      else return authorsToDisplay.slice(0, authorDisplayLimit) + "..."
+    }
+  }
+
+  let authorsToDisplay = createAuthorsDisplay();
+
   return (
     <div className="card">
       {typeof props.book.volumeInfo.imageLinks !== "undefined" ? (
@@ -13,12 +30,13 @@ export default function BookCard(props) {
       ) : (
         <img
           src={img_not_found}
-          alt="image not found"
+          alt="not found"
           className="book-thumbnail"
         />
       )}
       <div className="card-book-text-container">
         <p className="card-book-name">{props.book.volumeInfo.title}</p>
+        <p className="card-book-author">{authorsToDisplay}</p>
         <p className="card-book-page">
           Page: {props.book.volumeInfo.pageCount}
         </p>
