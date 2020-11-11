@@ -9,33 +9,36 @@ import Wishlist from "./components/layout/Wishlist";
 import AuthorDetails from "./components/layout/AuthorDetails";
 import SearchResult from "./components/layout/SearchResult";
 import { BookshelfProvider } from "./contexts/BookshelfContext";
+import { WishlistProvider } from "./contexts/WishlistContext";
 
 function App() {
   return (
     <div className="App">
-      <BookshelfProvider>
-        <Router>
-          <Navbar />
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/wishlist">
-            <Wishlist />
-          </Route>
-          <Route path="/bookshelf">
-            <Bookshelf />
-          </Route>
-          <Route path="/bookdetails/:id">
-            <BookDetails />
-          </Route>
-          <Route path="/authordetails/:id">
-            <AuthorDetails />
-          </Route>
-          <Route path="/search">
-            <SearchResult />
-          </Route>
-        </Router>
-      </BookshelfProvider>
+      <WishlistProvider>
+        <BookshelfProvider>
+          <Router>
+            <Navbar />
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/wishlist">
+              <Wishlist />
+            </Route>
+            <Route path="/bookshelf">
+              <Bookshelf />
+            </Route>
+            <Route path="/bookdetails/:id">
+              <BookDetails />
+            </Route>
+            <Route path="/authordetails/:id">
+              <AuthorDetails />
+            </Route>
+            <Route path="/search">
+              <SearchResult />
+            </Route>
+          </Router>
+        </BookshelfProvider>
+      </WishlistProvider>
     </div>
   );
 }

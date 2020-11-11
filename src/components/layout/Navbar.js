@@ -8,6 +8,9 @@ export default function Navbar() {
       <Link to="/bookshelf">
           Bookshelf
       </Link>
+      <Link to="/wishlist">
+          Wishlist
+      </Link>
     </div>
   );
 }
