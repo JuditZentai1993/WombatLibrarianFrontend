@@ -20,7 +20,7 @@ export default function AuthorDetails() {
   }
 
   const fetchAllBooksOfAuthor = () => {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:stephen+king&maxResults=40")
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:stephen+king&maxResults=20")
     .then(response => {
       setAuthorDetailsFromGoogle(response.data.items);
     });
