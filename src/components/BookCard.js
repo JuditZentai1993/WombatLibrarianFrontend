@@ -1,12 +1,13 @@
 import React from "react";
-import img_not_found from "../img_not_found.png";
+import imgNotFound from "../images/img_not_found.png";
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 
 export default function BookCard(props) {
   const createAuthorsDisplay = () => {
     const authors = props.book.volumeInfo.authors;
-    if (authors.length === 1) return authors[0]
+    if (authors === undefined) return ""
+    else if (authors.length === 1) return authors[0]
     else {
       let authorsToDisplay = "";
       for (let author of authors) {
@@ -31,7 +32,7 @@ export default function BookCard(props) {
         />
       ) : (
         <img
-          src={img_not_found}
+          src={imgNotFound}
           alt="not found"
           className="book-thumbnail"
         />
@@ -39,9 +40,6 @@ export default function BookCard(props) {
       <div className="card-book-text-container">
         <p className="card-book-name">{props.book.volumeInfo.title}</p>
         <p className="card-book-author">{authorsToDisplay}</p>
-        {/* <p className="card-book-page">
-          Page: {props.book.volumeInfo.pageCount}
-        </p> */}
         <p className="card-book-page">
           {typeof props.book.volumeInfo.pageCount !== "undefined" ? (
             <p>
