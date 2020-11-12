@@ -38,7 +38,6 @@ export default function BookDetails() {
   };
 
   let bookDetails = useLocation();
-  console.log(bookDetails);
 
   const createAuthorsDisplay = (props) => {
     let authors = bookDetails.state.book.volumeInfo.authors;
