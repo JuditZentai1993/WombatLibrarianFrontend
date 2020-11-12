@@ -27,7 +27,6 @@ export default function BookDetails() {
     }
 
   let bookDetails = useLocation();
-  console.log(bookDetails);
 
   return (
     <div className="book-details-container">
