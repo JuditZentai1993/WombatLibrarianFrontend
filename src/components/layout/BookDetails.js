@@ -24,12 +24,12 @@ export default function BookDetails() {
 
   let bookDetails = useLocation();
 
-  const createAuthorsDisplay = () => {
+  const createAuthorsDisplay = (props) => {
     let authors = bookDetails.state.book.volumeInfo.authors;
     if (authors === undefined) return <p>(No authors information available)</p>
     let authorDisplay = [];
     for (let author of authors) {
-    authorDisplay.push(<span><Link to={"/authordetails/" + author} author={author} >{author}</Link></span>)
+    authorDisplay.push(<span><Link to={{pathname: "/authordetails/" + author, state : author}} >{author}</Link></span>)
     if (author !== authors[authors.length - 1]) {
       authorDisplay.push(<span>, </span>)
     }
