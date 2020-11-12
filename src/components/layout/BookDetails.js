@@ -1,5 +1,5 @@
 import React, { useContext }from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { BookshelfContext } from "../../contexts/BookshelfContext"
 import "../../style/BookDetails.css";
 import imgNotFound from "../../images/img_not_found.png";
@@ -24,6 +24,19 @@ export default function BookDetails() {
 
   let bookDetails = useLocation();
 
+  const createAuthorsDisplay = () => {
+    let authors = bookDetails.state.book.volumeInfo.authors;
+    if (authors === undefined) return <p>(No authors information available)</p>
+    let authorDisplay = [];
+    for (let author of authors) {
+    authorDisplay.push(<span><Link to={"/authordetails/" + author} author={author} >{author.toString()}</Link></span>)
+    if (author !== authors[authors.length - 1]) {
+      authorDisplay.push(<span>, </span>)
+    }
+    }
+    return authorDisplay
+  }
+
   return (
     <div className="book-details-container">
 
@@ -31,7 +44,7 @@ export default function BookDetails() {
         <div className="detail-card">
           <h1>{bookDetails.state.book.volumeInfo.title}</h1>
           <h2><i>- {bookDetails.state.book.volumeInfo.subtitle}</i></h2>
-          <h3>Written by {bookDetails.state.book.volumeInfo.authors}</h3>
+          <h3>Written by {createAuthorsDisplay()}</h3>
           <div>Categories: <b>{bookDetails.state.book.volumeInfo.categories}</b></div>
           <div>Language: <b>{bookDetails.state.book.volumeInfo.language}</b></div>
           <div>Maturity rating: <b>{bookDetails.state.book.volumeInfo.maturityRating}</b></div>
