@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "../../style/Navbar.css";
 
 export default function Navbar() {
@@ -19,9 +19,7 @@ export default function Navbar() {
     <div className="navbar">
       <ul>
         <li>
-          <li>
-            <a href="/bookshelf">Bookshelf</a>
-          </li>
+          <li><Link to="/bookshelf">Bookshelf</Link></li>
           <li>
             <a href="/wishlist">Wishlist</a>
           </li>

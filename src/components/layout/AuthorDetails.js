@@ -13,14 +13,14 @@ export default function AuthorDetails() {
   }, [])
   
   const fetchTotalItemCount = () => {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:stephen+king&maxResults=1")
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=stephen+king&maxResults=1")
       .then(response => {
         setTotalItems(response.data.totalItems);
       });
   }
 
   const fetchAllBooksOfAuthor = () => {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:stephen+king&maxResults=20")
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=stephen+king&maxResults=20")
     .then(response => {
       setAuthorDetailsFromGoogle(response.data.items);
     });
