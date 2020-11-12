@@ -30,10 +30,10 @@ function App() {
             <Route path="/bookdetails/:id">
               <BookDetails />
             </Route>
-            <Route path="/authordetails/:id">
+            <Route path="/authordetails/:name">
               <AuthorDetails />
             </Route>
-            <Route path="/search">
+            <Route path="/search/:searchTerm">
               <SearchResult />
             </Route>
           </Router>

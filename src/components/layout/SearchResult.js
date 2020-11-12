@@ -18,10 +18,8 @@ export default function SearchResult(props) {
       .then((response) => {
         if (response.data.totalItems !== 0) {
           setBooks(response.data.items);
-          console.log("set books");
         } else {
           setBooks([]);
-          console.log("Wrong query");
         }
       });
   };
