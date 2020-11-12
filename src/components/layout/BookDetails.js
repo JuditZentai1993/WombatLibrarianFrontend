@@ -1,6 +1,7 @@
 import React, { useContext }from 'react';
 import { useLocation } from "react-router-dom";
 import { BookshelfContext } from "../../contexts/BookshelfContext"
+import "../../style/BookDetails.css";
 import img_not_found from "../../img_not_found.png";
 
 export default function BookDetails() {
@@ -32,15 +33,15 @@ export default function BookDetails() {
     <div className="book-details-container">
 
       <div className="book-details">
-        <div className="detailCard">
+        <div className="detail-card">
           <h1>{bookDetails.state.book.volumeInfo.title}</h1>
-          <h2>{bookDetails.state.book.volumeInfo.subtitle}</h2>
-          <h2>Written by {bookDetails.state.book.volumeInfo.authors}</h2>
-          <div>Categories: {bookDetails.state.book.volumeInfo.categories}</div>
-          <div>Language: {bookDetails.state.book.volumeInfo.language}</div>
-          <div>Maturity rating: {bookDetails.state.book.volumeInfo.maturityRating}</div>
-          <div>Published in {bookDetails.state.book.volumeInfo.publishedDate}</div>
-          <div>Publisher: {bookDetails.state.book.volumeInfo.publisher}</div>
+          <h2><i>- {bookDetails.state.book.volumeInfo.subtitle}</i></h2>
+          <h3>Written by {bookDetails.state.book.volumeInfo.authors}</h3>
+          <div>Categories: <b>{bookDetails.state.book.volumeInfo.categories}</b></div>
+          <div>Language: <b>{bookDetails.state.book.volumeInfo.language}</b></div>
+          <div>Maturity rating: <b>{bookDetails.state.book.volumeInfo.maturityRating}</b></div>
+          <div>Published in <b>{bookDetails.state.book.volumeInfo.publishedDate}</b></div>
+          <div>Publisher: <b>{bookDetails.state.book.volumeInfo.publisher}</b></div>
         </div>
         
         <div className="book-cover">
@@ -59,6 +60,7 @@ export default function BookDetails() {
         </div>
 
         <div className="book-description">
+        <hr/>
           "{bookDetails.state.book.volumeInfo.description}"
         </div>
       </div>
