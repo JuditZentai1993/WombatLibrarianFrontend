@@ -11,7 +11,7 @@ import wombat from "../../images/wombat1.jpg";
   }
 
   return (
-    <div className="card-container">
+    <div>
       {
       wishlist.length > 0 ?
         (<div className="card-container">

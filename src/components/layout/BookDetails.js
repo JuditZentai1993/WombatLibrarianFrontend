@@ -73,7 +73,11 @@ export default function BookDetails() {
           </div>
           <div>
             Published in{" "}
-            <b>{bookDetails.state.book.volumeInfo.publishedDate}</b>
+            {bookDetails.state.book.volumeInfo.publishedDate ? (
+              <b>{bookDetails.state.book.volumeInfo.publishedDate}</b>
+            ) : (
+              <b>Unknown</b>
+            )}
           </div>
           <div>
             Publisher: <b>{bookDetails.state.book.volumeInfo.publisher}</b>

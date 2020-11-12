@@ -73,7 +73,6 @@ let titlesToDisplay = createtitlesDisplay();
             <p>
               <Rater total={5} rating={props.book.volumeInfo.averageRating} interactive={false} /> ({props.book.volumeInfo.ratingsCount})
             </p>
-            
           ) : <p>
                 <Rater total={5} rating={0} interactive={false} /> (0) 
               </p>

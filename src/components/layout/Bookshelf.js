@@ -11,7 +11,7 @@ const Bookshelf = () => {
   }
 
   return (
-    <div className="card-container">
+    <div>
       {
       bookshelf.length > 0 ? 
         (<div className="card-container">
