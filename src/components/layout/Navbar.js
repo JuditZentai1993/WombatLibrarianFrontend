@@ -20,6 +20,9 @@ export default function Navbar() {
       <ul>
         <li>
           <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
             <a href="/bookshelf">Bookshelf</a>
           </li>
           <li>
