@@ -53,11 +53,11 @@ export default function BookDetails() {
             )}
           <button onClick={() => {addToBookshelf(bookDetails.state.book)}}>Add to Bookshelf</button>
         </div>
+      </div>
 
-        <div className="book-description">
+      <div className="book-description">
         <hr/>
-          "{bookDetails.state.book.volumeInfo.description}"
-        </div>
+        "{bookDetails.state.book.volumeInfo.description}"
       </div>
 
     </div>

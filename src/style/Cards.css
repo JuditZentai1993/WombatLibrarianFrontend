@@ -8,6 +8,7 @@
 }
 
 .card {
+  min-height: 400px;
   padding: 10 px;
   margin: 5px;
   width: 180px;
@@ -23,6 +24,14 @@
 .card-book-text-container {
   text-align: left;
   padding: 10px;
+}
+
+.card-book-text-container p,
+card-book-text-container p:hover,
+card-book-text-container p:focus,
+card-book-text-container p:active {
+  color: black;
+  text-decoration: none !important;
 }
 
 .card-book-name {

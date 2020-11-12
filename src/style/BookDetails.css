@@ -1,6 +1,7 @@
 .book-details-container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 30px 150px;
+  padding: 20px;
 }
 
 .book-details {
@@ -25,7 +26,10 @@
 }
 
 .book-description {
-  margin: 50px 300px;
   font-style: italic;
   line-height: 25px;
+}
+
+.book-description hr {
+  margin-bottom: 20px;
 }
