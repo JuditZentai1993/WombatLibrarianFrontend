@@ -5,12 +5,6 @@ export default function Navbar() {
   return (
     <div>
       <h1>Navbar</h1>
-      <Link to="/bookshelf">
-          Bookshelf
-      </Link>
-      <Link to="/wishlist">
-          Wishlist
-      </Link>
     </div>
   );
 }
