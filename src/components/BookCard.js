@@ -8,20 +8,35 @@ export default function BookCard(props) {
   const createAuthorsDisplay = () => {
     const authors = props.book.volumeInfo.authors;
     if (authors === undefined) return ""
-    else if (authors.length === 1) return authors[0]
+    // else if (authors.length === 1) return authors[0]
     else {
       let authorsToDisplay = "";
       for (let author of authors) {
         authorsToDisplay += author + ", "
       }
       authorsToDisplay = authorsToDisplay.slice(0, (authorsToDisplay.length - 2));
-      const authorDisplayLimit = 35
+      const authorDisplayLimit = 42
       if (authorsToDisplay.length < authorDisplayLimit) return authorsToDisplay
       else return authorsToDisplay.slice(0, authorDisplayLimit) + "..."
     }
   }
-
   let authorsToDisplay = createAuthorsDisplay();
+
+  const createtitlesDisplay = () => {
+  const titles = props.book.volumeInfo.title;
+  if (titles === undefined) return ""
+  else {
+    let titlesToDisplay = "";
+    titlesToDisplay += titles
+    titlesToDisplay = titlesToDisplay.slice(0, (titlesToDisplay.length - 0));
+    const titlesDisplayLimit = 50
+    if (titlesToDisplay.length < titlesDisplayLimit) return titlesToDisplay
+    else return titlesToDisplay.slice(0, titlesDisplayLimit) + "..."
+  }
+}
+let titlesToDisplay = createtitlesDisplay();
+
+
 
   return (
     <Link className="link" to={{
@@ -44,7 +59,7 @@ export default function BookCard(props) {
           />
         )}
       <div className="card-book-text-container">
-        <p className="card-book-name">{props.book.volumeInfo.title}</p>
+        <p className="card-book-name">{titlesToDisplay}</p>
         <p className="card-book-author">{authorsToDisplay}</p>
         <p className="card-book-page">
           {typeof props.book.volumeInfo.pageCount !== "undefined" ? (

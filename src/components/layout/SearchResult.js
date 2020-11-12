@@ -19,9 +19,9 @@ export default function SearchResult(props) {
         if (response.data.totalItems !== 0) {
           setBooks(response.data.items);
           console.log("set books");
+          console.log(searchTerm);
         } else {
           setBooks([]);
-          console.log("Wrong query");
         }
       });
   };

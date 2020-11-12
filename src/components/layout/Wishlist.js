@@ -3,7 +3,6 @@ import { WishlistContext } from "../../contexts/WishlistContext";
 import BookCard from "../BookCard";
 import wombat from "../../images/wombat1.jpg";
 
-
   const Wishlist = () => {
     const [wishlist, setWishlist] = useContext(WishlistContext);
 
