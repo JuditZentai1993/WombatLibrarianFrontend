@@ -17,7 +17,7 @@ export default function AuthorDetails(props) {
 
   useEffect(() => {
     fetchTotalItemCount();
-    fetchAllBooksOfAuthor();
+    fetchBooksOfAuthor();
   }, [])
   
   const fetchTotalItemCount = () => {
@@ -27,7 +27,7 @@ export default function AuthorDetails(props) {
       });
   }
 
-  const fetchAllBooksOfAuthor = () => {
+  const fetchBooksOfAuthor = () => {
     axios.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:" + author.state 
     + "&startIndex=" + startIndex + "&maxResults=" + maxResultsPerRequest)
     .then(response => {
@@ -45,7 +45,7 @@ export default function AuthorDetails(props) {
       <p>Total results: {totalItems}</p>
       <InfiniteScroll className="card-container"
         dataLength={authorDetailsFromGoogle.length} 
-        next={fetchAllBooksOfAuthor}
+        next={fetchBooksOfAuthor}
         hasMore={authorDetailsFromGoogle.length < totalItems}
         loader={hasMoreData ? (<div><h4>Loading...</h4><img src={wombatLoading} alt="loading wombat" height="40%"/></div>) : null}>
           <BooksOfAuthor books={authorDetailsFromGoogle} />
