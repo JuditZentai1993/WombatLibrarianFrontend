@@ -38,6 +38,7 @@ export default function BookDetails() {
   };
 
   let bookDetails = useLocation();
+  console.log(bookDetails);
 
   const createAuthorsDisplay = (props) => {
     let authors = bookDetails.state.book.volumeInfo.authors;
@@ -73,7 +74,11 @@ export default function BookDetails() {
           </div>
           <div>
             Published in{" "}
-            <b>{bookDetails.state.book.volumeInfo.publishedDate}</b>
+            {bookDetails.state.book.volumeInfo.publishedDate ? (
+              <b>{bookDetails.state.book.volumeInfo.publishedDate}</b>
+            ) : (
+              <b>Unknown</b>
+            )}
           </div>
           <div>
             Publisher: <b>{bookDetails.state.book.volumeInfo.publisher}</b>
