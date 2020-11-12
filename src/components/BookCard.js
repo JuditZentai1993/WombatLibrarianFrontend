@@ -4,7 +4,11 @@ import img_not_found from "../img_not_found.png";
 
 export default function BookCard(props) {
   return (
-    <Link to={"/bookdetails/" + props.book.id} style={{ textDecoration: 'none' }}>
+    <Link to={{
+      pathname: `/bookdetails/${props.book.id}`,
+      state: props,
+      style: { textDecoration: 'none' }
+    }}>
       <div className="card">
         {typeof props.book.volumeInfo.imageLinks !== "undefined" ? (
           <img
