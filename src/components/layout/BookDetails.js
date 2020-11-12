@@ -2,23 +2,19 @@ import React, { useContext }from 'react';
 import { useLocation } from "react-router-dom";
 import { BookshelfContext } from "../../contexts/BookshelfContext"
 import "../../style/BookDetails.css";
-import img_not_found from "../../img_not_found.png";
+import imgNotFound from "../../images/img_not_found.png";
 
 export default function BookDetails() {
 
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
 
     const addToBookshelf = (currentBook) => {
-        const id = currentBook.id;
-        const author = currentBook.volumeInfo.author;
-        const title = currentBook.volumeInfo.title;
-        const smallThumbnail = currentBook.volumeInfo.imageLinks.smallThumbnail;
-        const bookToAdd = {id, author, title, smallThumbnail};
-        if (isBookAddedToBookshelf(id)) {
-            window.alert("Oops...You already added that book to your bookshelf!");
-        } else {
-            setBookshelf([...bookshelf, bookToAdd]);
-        }
+      if (isBookAddedToBookshelf(currentBook.id)) {
+        window.alert("Oops...You already added that book to your bookshelf!");
+    } else {
+        setBookshelf([...bookshelf, currentBook]);
+        console.log(currentBook);
+    }
     }
 
     const isBookAddedToBookshelf = (id) => {
@@ -51,8 +47,8 @@ export default function BookDetails() {
               />
             ) : (
               <img
-                src={img_not_found}
-                alt="image not found"
+                src={imgNotFound}
+                alt="not found"
               />
             )}
           <button onClick={() => {addToBookshelf(bookDetails.state.book)}}>Add to Bookshelf</button>

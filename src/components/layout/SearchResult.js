@@ -12,11 +12,11 @@ export default function SearchResult(props) {
       .get(
         "https://www.googleapis.com/books/v1/volumes?q=" +
           searchTerm +
-          "&maxResults=10" +
+          "&maxResults=40" +
           "&key=AIzaSyBEfVoHvgADAJRNDBEFYgxyrfbzSLz1kok"
       )
       .then((response) => {
-        if (response.data.totalItems != 0) {
+        if (response.data.totalItems !== 0) {
           setBooks(response.data.items);
           console.log("set books");
         } else {

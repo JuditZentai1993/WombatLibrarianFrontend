@@ -1,12 +1,12 @@
 import React from "react";
-import wombat_with_glasses from "../../wombat-with-glasses-prints.jpg";
+import wombatWithGlasses from "../../images/wombat-with-glasses-prints.jpg";
 import "../../style/Home.css";
 
 export default function Home() {
   return (
     <div className="home-container">
       <div className="wombat-logo">
-        <img alt="The wombat librarian" src={wombat_with_glasses} height={600}></img>
+        <img alt="The wombat librarian" src={wombatWithGlasses} height={600}></img>
       </div>
       <div className="introduction">
         <br></br>
