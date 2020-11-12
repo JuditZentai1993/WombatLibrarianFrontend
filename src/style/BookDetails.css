@@ -1,0 +1,35 @@
+.book-details-container {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 30px 150px;
+  padding: 20px;
+}
+
+.book-details {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: center;
+}
+
+.book-cover {
+  display: grid;
+  size: 200px;
+}
+
+.detail-card {
+  padding: 0px 20px 0px 0px;
+  line-height: 25px;
+}
+
+.book-cover {
+  padding: 0px 0px 0px 20px;
+}
+
+.book-description {
+  font-style: italic;
+  line-height: 25px;
+}
+
+.book-description hr {
+  margin-bottom: 20px;
+}

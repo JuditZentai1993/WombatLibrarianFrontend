@@ -24,7 +24,40 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>The Wombat Librarian</title>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+
+      // Wombat picture fades in
+      $(function(){
+          $(".wombat-logo")
+              .hide()
+              .css('opacity', 0)
+              .slideDown('slow')
+              .animate(
+                  { opacity: 1 },
+                  { queue: false, duration: 'slow' }
+              );
+      });
+
+      // Intro on homepage fades in
+      $(function(){
+          $(".introduction")
+              .hide()
+              .css('opacity', 0)
+              .slideDown('slow')
+              .animate(
+                  { opacity: 1 },
+                  { queue: false, duration: 'slow' }
+              );
+      });
+
+    </script>
+    <!-- End of JQuery -->
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
