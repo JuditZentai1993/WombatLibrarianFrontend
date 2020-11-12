@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "../../style/Navbar.css";
 
 export default function Navbar() {
@@ -20,13 +20,13 @@ export default function Navbar() {
       <ul>
         <li>
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/bookshelf">Bookshelf</a>
+            <Link to="/bookshelf">Bookshelf</Link>
           </li>
           <li>
-            <a href="/wishlist">Wishlist</a>
+            <Link to="/wishlist">Wishlist</Link>
           </li>
         </li>
         <li className="search-container">
