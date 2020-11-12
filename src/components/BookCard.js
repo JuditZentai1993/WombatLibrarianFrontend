@@ -24,7 +24,7 @@ export default function BookCard(props) {
   let authorsToDisplay = createAuthorsDisplay();
 
   return (
-    <Link to={{
+    <Link className="link" to={{
       pathname: `/bookdetails/${props.book.id}`,
       state: props,
       style: { textDecoration: 'none' }
