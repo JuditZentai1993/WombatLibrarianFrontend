@@ -3,10 +3,26 @@ import { useLocation } from "react-router-dom";
 import { BookshelfContext } from "../../contexts/BookshelfContext"
 import "../../style/BookDetails.css";
 import imgNotFound from "../../images/img_not_found.png";
+import { WishlistContext } from "../../contexts/WishlistContext"
 
 export default function BookDetails() {
 
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
+  const [wishlist, setwishlist] = useContext(WishlistContext);
+
+  const addToWishlist = (currentBook) => {
+      if (isBookAddedToWishlist(currentBook.id)) {
+          window.alert("Oops...You already added that book to your wishlist!");
+      } else {
+          setwishlist([...wishlist, currentBook]);
+          console.log(currentBook);
+      }
+  }
+
+  const isBookAddedToWishlist = (id) => {
+      let bookOnWishlist = wishlist.filter(book => book.id === id);
+      return bookOnWishlist.length > 0
+  }
 
     const addToBookshelf = (currentBook) => {
       if (isBookAddedToBookshelf(currentBook.id)) {
@@ -52,6 +68,7 @@ export default function BookDetails() {
               />
             )}
           <button onClick={() => {addToBookshelf(bookDetails.state.book)}}>Add to Bookshelf</button>
+          <button onClick={() => {addToWishlist(bookDetails.state.book)}}>Add to Wishlist</button>
         </div>
       </div>
 
