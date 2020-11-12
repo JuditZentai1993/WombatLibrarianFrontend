@@ -11,6 +11,7 @@ export default function AuthorDetails(props) {
   const [totalItems, setTotalItems] = useState(0);
   const maxResultsPerRequest = 40;
   const [startIndex, setStartIndex] = useState(0);
+  const [hasMoreData, setHasMoreData] = useState(true);
 
   let author = useLocation();
 
@@ -20,28 +21,33 @@ export default function AuthorDetails(props) {
   }, [])
   
   const fetchTotalItemCount = () => {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + author.state + "&maxResults=1")
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:" + author.state + "&maxResults=1")
       .then(response => {
         setTotalItems(response.data.totalItems);
       });
   }
 
   const fetchAllBooksOfAuthor = () => {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + author.state 
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:" + author.state 
     + "&startIndex=" + startIndex + "&maxResults=" + maxResultsPerRequest)
     .then(response => {
-      setAuthorDetailsFromGoogle([...authorDetailsFromGoogle, ...response.data.items]);
-      setStartIndex(startIndex + maxResultsPerRequest);
+      try {
+        setAuthorDetailsFromGoogle([...authorDetailsFromGoogle, ...response.data.items]);
+        setStartIndex(startIndex + maxResultsPerRequest);
+      } catch {
+        setHasMoreData(false)
+      }
     });
   }
 
   return (
     <div>
+      <p>Total results: {totalItems}</p>
       <InfiniteScroll className="card-container"
         dataLength={authorDetailsFromGoogle.length} 
         next={fetchAllBooksOfAuthor}
         hasMore={authorDetailsFromGoogle.length < totalItems}
-        loader={<div><h4>Loading...</h4><img src={wombatLoading} alt="loading wombat" height="40%"/></div>}>
+        loader={hasMoreData ? (<div><h4>Loading...</h4><img src={wombatLoading} alt="loading wombat" height="40%"/></div>) : null}>
           <BooksOfAuthor books={authorDetailsFromGoogle} />
       </InfiniteScroll>
     </div>
