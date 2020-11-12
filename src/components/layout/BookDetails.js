@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { useLocation } from "react-router-dom";
-import { BookshelfContext } from "../../contexts/BookshelfContext";
+import React, { useContext }from 'react';
+import { useLocation, Link } from "react-router-dom";
+import { BookshelfContext } from "../../contexts/BookshelfContext"
 import "../../style/BookDetails.css";
 import imgNotFound from "../../images/img_not_found.png";
 import { WishlistContext } from "../../contexts/WishlistContext";
@@ -39,6 +39,19 @@ export default function BookDetails() {
 
   let bookDetails = useLocation();
 
+  const createAuthorsDisplay = (props) => {
+    let authors = bookDetails.state.book.volumeInfo.authors;
+    if (authors === undefined) return <p>(No authors information available)</p>
+    let authorDisplay = [];
+    for (let author of authors) {
+    authorDisplay.push(<span><Link className="author-link" to={{pathname: "/authordetails/" + author, state : author}} >{author}</Link></span>)
+    if (author !== authors[authors.length - 1]) {
+      authorDisplay.push(<span>, </span>)
+    }
+    }
+    return authorDisplay
+  }
+
   return (
     <div className="book-details-container">
       <div className="book-details">
@@ -47,7 +60,7 @@ export default function BookDetails() {
           <h2>
             <i>- {bookDetails.state.book.volumeInfo.subtitle}</i>
           </h2>
-          <h3>Written by {bookDetails.state.book.volumeInfo.authors}</h3>
+          <h3>Written by {createAuthorsDisplay()}</h3>
           <div>
             Categories: <b>{bookDetails.state.book.volumeInfo.categories}</b>
           </div>
@@ -66,7 +79,6 @@ export default function BookDetails() {
             Publisher: <b>{bookDetails.state.book.volumeInfo.publisher}</b>
           </div>
         </div>
-
         <div className="book-cover">
           {typeof bookDetails.state.book.volumeInfo.imageLinks !==
           "undefined" ? (

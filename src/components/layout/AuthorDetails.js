@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import BooksOfAuthor from "./BooksOfAuthor";
 
-export default function AuthorDetails() {
+export default function AuthorDetails(props) {
 
   const [authorDetailsFromGoogle, setAuthorDetailsFromGoogle] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
+
+  let author = useLocation();
 
   useEffect(() => {
     fetchTotalItemCount();
@@ -13,14 +16,14 @@ export default function AuthorDetails() {
   }, [])
   
   const fetchTotalItemCount = () => {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=stephen+king&maxResults=1")
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + author.state + "&maxResults=1")
       .then(response => {
         setTotalItems(response.data.totalItems);
       });
   }
 
   const fetchAllBooksOfAuthor = () => {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=stephen+king&maxResults=20")
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + author.state + "&maxResults=40")
     .then(response => {
       setAuthorDetailsFromGoogle(response.data.items);
     });
