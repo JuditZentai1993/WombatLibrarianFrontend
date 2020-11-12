@@ -19,9 +19,14 @@ export default function Navbar() {
     <div className="navbar">
       <ul>
         <li>
-          <li><Link to="/bookshelf">Bookshelf</Link></li>
           <li>
-            <a href="/wishlist">Wishlist</a>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/bookshelf">Bookshelf</Link>
+          </li>
+          <li>
+            <Link to="/wishlist">Wishlist</Link>
           </li>
         </li>
         <li className="search-container">

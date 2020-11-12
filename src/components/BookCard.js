@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import imgNotFound from "../images/img_not_found.png";
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
@@ -23,20 +24,25 @@ export default function BookCard(props) {
   let authorsToDisplay = createAuthorsDisplay();
 
   return (
-    <div className="card">
-      {typeof props.book.volumeInfo.imageLinks !== "undefined" ? (
-        <img
-          src={props.book.volumeInfo.imageLinks.thumbnail}
-          alt={props.book.volumeInfo.title}
-          className="book-thumbnail"
-        />
-      ) : (
-        <img
-          src={imgNotFound}
-          alt="not found"
-          className="book-thumbnail"
-        />
-      )}
+    <Link to={{
+      pathname: `/bookdetails/${props.book.id}`,
+      state: props,
+      style: { textDecoration: 'none' }
+    }}>
+      <div className="card">
+        {typeof props.book.volumeInfo.imageLinks !== "undefined" ? (
+          <img
+            src={props.book.volumeInfo.imageLinks.thumbnail}
+            alt={props.book.volumeInfo.title}
+            className="book-thumbnail"
+          />
+        ) : (
+          <img
+            src={imgNotFound}
+            alt="not found"
+            className="book-thumbnail"
+          />
+        )}
       <div className="card-book-text-container">
         <p className="card-book-name">{props.book.volumeInfo.title}</p>
         <p className="card-book-author">{authorsToDisplay}</p>
@@ -57,7 +63,8 @@ export default function BookCard(props) {
         <p className="card-book-language">
           Language: {props.book.volumeInfo.language}
         </p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -1,0 +1,10 @@
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.introduction {
+  width: 700px;
+  line-height: 30px;
+}
