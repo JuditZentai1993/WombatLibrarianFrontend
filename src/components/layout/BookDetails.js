@@ -44,7 +44,7 @@ export default function BookDetails() {
     if (authors === undefined) return <p>(No authors information available)</p>
     let authorDisplay = [];
     for (let author of authors) {
-    authorDisplay.push(<span><Link className="author-link" to={{pathname: "/authordetails/" + author, state : author}} >{author}</Link></span>)
+    authorDisplay.push(<span><Link key={author} className="author-link" to={{pathname: "/authordetails/" + author, state : author}} >{author}</Link></span>)
     if (author !== authors[authors.length - 1]) {
       authorDisplay.push(<span>, </span>)
     }
