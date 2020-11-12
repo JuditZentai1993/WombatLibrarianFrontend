@@ -74,7 +74,8 @@ export default function BookDetails() {
 
       <div className="book-description">
         <hr/>
-        "{bookDetails.state.book.volumeInfo.description}"
+        "{typeof bookDetails.state.book.volumeInfo.description !== "undefined" ? 
+        bookDetails.state.book.volumeInfo.description: "No Description"}"
       </div>
 
     </div>
