@@ -34,3 +34,8 @@
 .book-description hr {
   margin-bottom: 20px;
 }
+
+.author-link {
+  text-decoration: none;
+  color: #4138a5;
+}
