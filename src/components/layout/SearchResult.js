@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import BookCard from "../BookCard";
+import wombutt from "../../images/wombutt.jpg"
 
 export default function SearchResult(props) {
   const { searchTerm } = useParams();
   const [books, setBooks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchBooks = () => {
+    setIsLoading(true);
     axios
       .get(
         "https://www.googleapis.com/books/v1/volumes?q=" +
@@ -18,21 +21,27 @@ export default function SearchResult(props) {
       .then((response) => {
         if (response.data.totalItems !== 0) {
           setBooks(response.data.items);
+          setIsLoading(false);
         } else {
           setBooks([]);
+          setIsLoading(false);
         }
-      });
+      })
   };
 
   useEffect(() => {
     fetchBooks();
   }, [searchTerm]);
 
-  return (
-    <div className="card-container">
+  return (<div>{!isLoading && books.length === 0 ? 
+  (<div>
+      <h3 className="not-found">No items were found for {searchTerm}.</h3>
+      <img src={wombutt} alt="no results"/>
+    </div>) : (<div className="card-container">
       {books.map((book) => (
         <BookCard book={book} key={book.id} />
       ))}
-    </div>
+  </div>)}</div>
+
   );
 }
