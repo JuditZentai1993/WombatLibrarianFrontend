@@ -58,7 +58,11 @@ export default function BookCard(props) {
             <p>
               <Rater total={5} rating={props.book.volumeInfo.averageRating} interactive={false} /> ({props.book.volumeInfo.ratingsCount})
             </p>
-          ) : null}
+            
+          ) : <p>
+                <Rater total={5} rating={0} interactive={false} /> (0) 
+              </p>
+          }
         </p>
         <p className="card-book-language">
           Language: {props.book.volumeInfo.language}
