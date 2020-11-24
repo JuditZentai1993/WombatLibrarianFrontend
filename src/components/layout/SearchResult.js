@@ -13,12 +13,7 @@ export default function SearchResult(props) {
   const fetchBooks = () => {
     setIsLoading(true);
     axios
-      .get(
-        "https://www.googleapis.com/books/v1/volumes?q=" +
-          searchTerm +
-          "&maxResults=40" +
-          "&key=AIzaSyBEfVoHvgADAJRNDBEFYgxyrfbzSLz1kok"
-      )
+      .get("https://localhost:5001/api/books/" + searchTerm)
       .then((response) => {
         if (response.data.totalItems !== 0) {
           setBooks(response.data.items);
