@@ -15,21 +15,8 @@ export default function AuthorDetails(props) {
   let author = useLocation();
 
   useEffect(() => {
-    fetchTotalItemCount();
     fetchBooksOfAuthor();
   }, []);
-
-  const fetchTotalItemCount = () => {
-    axios
-      .get(
-        "https://www.googleapis.com/books/v1/volumes?q=inauthor:" +
-          author.state +
-          "&maxResults=1"
-      )
-      .then((response) => {
-        setTotalItems(response.data.totalItems);
-      });
-  };
 
   const fetchBooksOfAuthor = () => {
     axios
@@ -43,23 +30,13 @@ export default function AuthorDetails(props) {
       )
     .then(response => {
       try {
+        if (totalItems === 0) setTotalItems(response.data.totalItems);
         setAuthorDetailsFromGoogle([...authorDetailsFromGoogle, ...response.data.items]);
         setStartIndex(startIndex + maxResultsPerRequest);
       } catch {
         setHasMoreData(false)
       }
     });
-
-    // axios.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:" + author.state
-    // + "&startIndex=" + startIndex + "&maxResults=" + maxResultsPerRequest)
-    // .then(response => {
-    //   try {
-    //     setAuthorDetailsFromGoogle([...authorDetailsFromGoogle, ...response.data.items]);
-    //     setStartIndex(startIndex + maxResultsPerRequest);
-    //   } catch {
-    //     setHasMoreData(false)
-    //   }
-    // });
   };
 
   return (
