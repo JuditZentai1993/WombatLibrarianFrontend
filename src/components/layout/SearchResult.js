@@ -13,7 +13,7 @@ export default function SearchResult(props) {
   const fetchBooks = () => {
     setIsLoading(true);
     axios
-      .get("https://localhost:5001/api/books/" + searchTerm)
+      .get("https://localhost:5001/api/search/" + searchTerm)
       .then((response) => {
         if (response.data.totalItems !== 0) {
           setBooks(response.data.items);
