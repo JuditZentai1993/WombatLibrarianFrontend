@@ -4,6 +4,7 @@ import { BookshelfContext } from "../../contexts/BookshelfContext"
 import "../../style/BookDetails.css";
 import imgNotFound from "../../images/img_not_found.png";
 import { WishlistContext } from "../../contexts/WishlistContext";
+import axios from 'axios';
 
 export default function BookDetails() {
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
@@ -27,8 +28,16 @@ export default function BookDetails() {
     if (isBookAddedToBookshelf(currentBook.id)) {
       window.alert("Oops...You already added that book to your bookshelf!");
     } else {
+      axios({
+        method: 'post',
+        url: 'https://localhost:5001/api/bookshelf/',
+        data: {
+          id: currentBook.id,
+          author: currentBook.author,
+          title: currentBook.title
+        }
+      });
       setBookshelf([...bookshelf, currentBook]);
-      console.log(currentBook);
     }
   };
 
