@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import "../../style/Navbar.css";
+import axios from "axios";
 
 export default function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +16,12 @@ export default function Navbar() {
     setSearchTerm(event.target.value);
   };
 
+  const getBookshelfContent = (event) => {
+    axios
+      .get("https://localhost:5001/api/bookshelf/")
+      .then(response => console.log(response))
+  }
+
   return (
     <div className="navbar">
       <ul>
@@ -23,7 +30,7 @@ export default function Navbar() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/bookshelf">Bookshelf</Link>
+            <Link to="/bookshelf" onClick={getBookshelfContent}>Bookshelf</Link>
           </li>
           <li>
             <Link to="/wishlist">Wishlist</Link>
