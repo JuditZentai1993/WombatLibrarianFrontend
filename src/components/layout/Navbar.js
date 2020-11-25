@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
+import { BookshelfContext } from "../../contexts/BookshelfContext"
 import { Redirect, Link } from "react-router-dom";
 import "../../style/Navbar.css";
 import axios from "axios";
 
 export default function Navbar() {
+  const [bookshelf, setBookshelf] = useContext(BookshelfContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState(null);
 
@@ -19,7 +21,7 @@ export default function Navbar() {
   const getBookshelfContent = (event) => {
     axios
       .get("https://localhost:5001/api/bookshelf/")
-      .then(response => console.log(response))
+      .then(response => { console.log("HELLOOOOO"); console.log(response.data); setBookshelf([response.data]);})
   }
 
   return (
