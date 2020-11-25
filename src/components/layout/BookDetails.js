@@ -15,7 +15,6 @@ export default function BookDetails() {
       window.alert("Oops...You already added that book to your wishlist!");
     } else {
       setwishlist([...wishlist, currentBook]);
-      console.log(currentBook);
     }
   };
 
@@ -28,16 +27,18 @@ export default function BookDetails() {
     if (isBookAddedToBookshelf(currentBook.id)) {
       window.alert("Oops...You already added that book to your bookshelf!");
     } else {
+      console.log(currentBook);
       axios({
         method: 'post',
         url: 'https://localhost:5001/api/bookshelf/',
         data: {
+          // TODO
           id: currentBook.id,
-          author: currentBook.author,
-          title: currentBook.title
+          authors: currentBook.volumeInfo.authors.map(authorName => {return {name: authorName}}),
+          title: currentBook.volumeInfo.title
         }
       });
-      setBookshelf([...bookshelf, currentBook]);
+      // setBookshelf([...bookshelf, currentBook]);
     }
   };
 
