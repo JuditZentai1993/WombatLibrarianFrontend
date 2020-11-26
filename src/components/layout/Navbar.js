@@ -21,7 +21,9 @@ export default function Navbar() {
   const getBookshelfContent = (event) => {
     axios
       .get("https://localhost:5001/api/bookshelf/")
-      .then(response => { console.log("HELLOOOOO"); console.log(response.data); setBookshelf([response.data]);})
+      .then(response => { 
+        setBookshelf([response.data]);
+      })
   }
 
   return (
