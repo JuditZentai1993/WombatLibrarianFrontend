@@ -5,6 +5,7 @@ import "../../style/BookDetails.css";
 import imgNotFound from "../../images/img_not_found.png";
 import { WishlistContext } from "../../contexts/WishlistContext";
 import axios from 'axios';
+import "../../style/Button.scss";
 
 export default function BookDetails() {
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
@@ -32,13 +33,21 @@ export default function BookDetails() {
         method: 'post',
         url: 'https://localhost:5001/api/bookshelf/',
         data: {
-          // TODO
           id: currentBook.id,
-          authors: currentBook.volumeInfo.authors.map(authorName => {return {name: authorName}}),
-          title: currentBook.volumeInfo.title
+          // authors: currentBook.authors.map(authorName => {return {name: authorName}}),
+          title: currentBook.title,
+          description: currentBook.description,
+          pageCount: currentBook.pageCount,
+          rating: currentBook.rating,
+          ratingCount: currentBook.ratingCount,
+          language: currentBook.language,
+          maturityRating: currentBook.maturityRating,
+          published: currentBook.published,
+          publisher: currentBook.publisher,
+          thumbnail: currentBook.thumbnail,
+          subtitle: currentBook.subtitle
         }
       });
-      // setBookshelf([...bookshelf, currentBook]);
     }
   };
 
@@ -50,12 +59,13 @@ export default function BookDetails() {
   let bookDetails = useLocation();
 
   const createAuthorsDisplay = (props) => {
-    let authors = bookDetails.state.book.volumeInfo.authors;
+    let authors = bookDetails.state.book.authors;
+    console.log(authors);
     if (authors === undefined) return <p>(No authors information available)</p>
     let authorDisplay = [];
     for (let author of authors) {
-    authorDisplay.push(<span><Link className="author-link" to={{pathname: "/authordetails/" + author.replaceAll(" ", "+"), state : author.replaceAll(" ", "+")}} >{author}</Link></span>)
-    if (author !== authors[authors.length - 1]) {
+    authorDisplay.push(<span><Link className="author-link" to={{pathname: "/authordetails/" + author.name.replaceAll(" ", "+"), state : author.name.replaceAll(" ", "+")}} >{author.name}</Link></span>)
+    if (author.name !== authors[authors.length - 1].name) {
       authorDisplay.push(<span>, </span>)
     }
     }
@@ -66,51 +76,58 @@ export default function BookDetails() {
     <div className="book-details-container">
       <div className="book-details">
         <div className="detail-card">
-          <h1>{bookDetails.state.book.volumeInfo.title}</h1>
+          <h1>{bookDetails.state.book.title}</h1>
           <h2>
-            <i>- {bookDetails.state.book.volumeInfo.subtitle}</i>
+            <i>- {bookDetails.state.book.subtitle}</i>
           </h2>
           <h3>Written by {createAuthorsDisplay()}</h3>
           <div>
-            Categories: <b>{bookDetails.state.book.volumeInfo.categories}</b>
+            Categories: 
+            {bookDetails.state.book.categories.map((category) => (
+              <b key={category.id + category.name}>{category.name}</b>
+            ))}
           </div>
           <div>
-            Language: <b>{bookDetails.state.book.volumeInfo.language}</b>
+            Language: <b>{bookDetails.state.book.language}</b>
           </div>
           <div>
             Maturity rating:{" "}
-            <b>{bookDetails.state.book.volumeInfo.maturityRating}</b>
+            <b>{bookDetails.state.book.maturityRating}</b>
           </div>
           <div>
             Published in{" "}
-            {bookDetails.state.book.volumeInfo.publishedDate ? (
-              <b>{bookDetails.state.book.volumeInfo.publishedDate}</b>
+            {bookDetails.state.book.published ? (
+              <b>{bookDetails.state.book.published}</b>
             ) : (
               <b>Unknown</b>
             )}
           </div>
           <div>
-            Publisher: <b>{bookDetails.state.book.volumeInfo.publisher}</b>
+            Publisher: <b>{bookDetails.state.book.publisher}</b>
           </div>
         </div>
         <div className="book-cover">
-          {typeof bookDetails.state.book.volumeInfo.imageLinks !==
-          "undefined" ? (
+          {bookDetails.state.book.thumbnail !==
+          null ? (
             <img
-              src={bookDetails.state.book.volumeInfo.imageLinks.thumbnail}
-              alt={bookDetails.state.book.volumeInfo.title}
+              src={bookDetails.state.book.thumbnail}
+              alt={bookDetails.state.book.title}
             />
           ) : (
             <img src={imgNotFound} alt="not found" />
           )}
-          <button
+          <button 
+            className="add-btn"
+            data-wipe="Add to Bookshelf"
             onClick={() => {
               addToBookshelf(bookDetails.state.book);
             }}
           >
             Add to Bookshelf
           </button>
-          <button
+          <button 
+            className="add-btn"
+            data-wipe="Add to Wishlist"
             onClick={() => {
               addToWishlist(bookDetails.state.book);
             }}
@@ -122,8 +139,8 @@ export default function BookDetails() {
 
       <div className="book-description">
         <hr />"
-        {typeof bookDetails.state.book.volumeInfo.description !== "undefined"
-          ? bookDetails.state.book.volumeInfo.description
+        {typeof bookDetails.state.book.description !== "undefined"
+          ? bookDetails.state.book.description
           : "No Description"}
         "
       </div>
