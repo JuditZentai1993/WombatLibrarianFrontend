@@ -34,7 +34,8 @@ export default function BookDetails() {
         url: 'https://localhost:5001/api/bookshelf/',
         data: {
           id: currentBook.id,
-          // authors: currentBook.authors.map(authorName => {return {name: authorName}}),
+          authors: currentBook.authors ? currentBook.authors.map(author => {return {name: author.name}}) : [{name: "Unknown"}],
+          categories: currentBook.categories ? currentBook.categories.map(category => {return {name: category.name}}) : [{name: "Unknown"}],
           title: currentBook.title,
           description: currentBook.description,
           pageCount: currentBook.pageCount,
@@ -61,7 +62,7 @@ export default function BookDetails() {
   const createAuthorsDisplay = (props) => {
     let authors = bookDetails.state.book.authors;
     console.log(authors);
-    if (authors === undefined) return <p>(No authors information available)</p>
+    if (authors == null) return <p>(No authors information available)</p>
     let authorDisplay = [];
     for (let author of authors) {
     authorDisplay.push(<span><Link className="author-link" to={{pathname: "/authordetails/" + author.name.replaceAll(" ", "+"), state : author.name.replaceAll(" ", "+")}} >{author.name}</Link></span>)
@@ -83,9 +84,14 @@ export default function BookDetails() {
           <h3>Written by {createAuthorsDisplay()}</h3>
           <div>
             Categories: 
-            {bookDetails.state.book.categories.map((category) => (
-              <b key={category.id + category.name}>{category.name}</b>
-            ))}
+            {bookDetails.state.book.categories ? (
+              bookDetails.state.book.categories.map((category) => (
+                <b key={category.id + category.name}>{category.name}</b>
+              ))
+            ) : (
+              <b>Unknown</b>
+            )}
+            
           </div>
           <div>
             Language: <b>{bookDetails.state.book.language}</b>

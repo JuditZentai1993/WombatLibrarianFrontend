@@ -10,6 +10,9 @@ const Bookshelf = () => {
     setBookshelf(bookshelf.filter(book => book.id !== id))
   }
 
+  console.log("ITT A KAKII")
+  console.log(bookshelf);
+
   return (
     <div>
       {

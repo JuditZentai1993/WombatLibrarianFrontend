@@ -22,6 +22,8 @@ export default function Navbar() {
     axios
       .get("https://localhost:5001/api/bookshelf/")
       .then(response => { 
+        console.log("IDE NEZZEL CSIRA")
+        console.log(response.data)
         setBookshelf([response.data]);
       })
   }
