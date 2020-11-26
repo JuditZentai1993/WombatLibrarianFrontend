@@ -15,8 +15,8 @@ export default function SearchResult(props) {
     axios
       .get("https://localhost:5001/api/search/" + searchTerm)
       .then((response) => {
-        if (response.data.totalItems !== 0) {
-          setBooks(response.data.items);
+        if (response.data.length !== 0) {
+          setBooks(response.data);
           setIsLoading(false);
         } else {
           setBooks([]);
