@@ -1,3 +1,7 @@
+.wombat {
+  height: 500;
+}
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -10,12 +14,13 @@
 
 .card {
   min-height: 450px;
+  max-height: 450px;
   padding: 10 px;
   margin: 5px;
   width: 200px;
   display: block;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 .card:hover {
@@ -55,7 +60,7 @@
 .book-thumbnail {
   margin-bottom: 10px;
   margin-top: 10px;
-  max-height: 197px;
+  max-height: 170px;
 }
 
 .book-smallthumbnail {
@@ -70,5 +75,4 @@
 
 .not-found {
   padding: 20 px;
-  
 }

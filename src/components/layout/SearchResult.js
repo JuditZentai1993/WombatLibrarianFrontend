@@ -10,7 +10,7 @@ export default function SearchResult(props) {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchBooks = () => {
+  const fetchBooks = async () => {
     setIsLoading(true);
     axios
       .get("https://localhost:5001/api/search/" + searchTerm)
@@ -22,22 +22,32 @@ export default function SearchResult(props) {
           setBooks([]);
           setIsLoading(false);
         }
-      })
+      });
   };
 
   useEffect(() => {
     fetchBooks();
   }, [searchTerm]);
 
-  return (<div>{isLoading ? (<div><h4>Loading...</h4><img src={wombatLoading} alt="loading wombat" height="40%"/></div>) : books.length === 0 ? 
-  (<div>
-      <h3 className="not-found">No items were found for {searchTerm}.</h3>
-      <img src={wombutt} alt="no results"/>
-    </div>) : (<div className="card-container">
-      {books.map((book) => (
-        <BookCard book={book} key={book.id} />
-      ))}
-  </div>)}</div>
-
+  return (
+    <div>
+      {isLoading ? (
+        <div className="wombat">
+          <h4>Loading...</h4>
+          <img src={wombatLoading} alt="loading wombat" />
+        </div>
+      ) : books.length === 0 ? (
+        <div>
+          <h3 className="not-found">No items were found for {searchTerm}.</h3>
+          <img src={wombutt} alt="no results" />
+        </div>
+      ) : (
+        <div className="card-container">
+          {books.map((book) => (
+            <BookCard book={book} key={book.id} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

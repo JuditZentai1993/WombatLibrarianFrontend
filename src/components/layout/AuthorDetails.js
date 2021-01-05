@@ -49,9 +49,9 @@ export default function AuthorDetails(props) {
         hasMore={authorDetailsFromGoogle.length < totalItems}
         loader={
           hasMoreData ? (
-            <div>
+            <div className = "wombat">
               <h4>Loading...</h4>
-              <img src={wombatLoading} alt="loading wombat" height="40%" />
+              <img src={wombatLoading} alt="loading wombat"/>
             </div>
           ) : null
         }
