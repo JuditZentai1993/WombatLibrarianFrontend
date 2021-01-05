@@ -52,7 +52,7 @@ export default function Navbar() {
               onChange={handleChange}
               minLength="3"
             />
-            <button type="submit" className="fa fa-search">
+            <button type="submit" disabled={searchTerm === ""} className="fa fa-search">
               Search
             </button>
           </form>
