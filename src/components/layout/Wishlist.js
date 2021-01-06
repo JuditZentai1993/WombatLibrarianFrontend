@@ -1,13 +1,18 @@
 import React, { useContext } from "react";
 import { WishlistContext } from "../../contexts/WishlistContext";
 import BookCard from "../BookCard";
+import axios from "axios";
 import wombat from "../../images/wombat1.jpg";
 
   const Wishlist = () => {
     const [wishlist, setWishlist] = useContext(WishlistContext);
 
   const removeFromWishlist = (id) => {
-    setWishlist(wishlist.filter(book => book.id !== id))
+    axios
+    .delete("https://localhost:5001/api/wishlist/" + id)
+    .then(() => {
+      setWishlist([...wishlist.filter(book => book.id !== id)])
+    })
   }
 
   return (
