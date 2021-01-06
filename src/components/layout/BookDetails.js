@@ -9,13 +9,33 @@ import "../../style/Button.scss";
 
 export default function BookDetails() {
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
-  const [wishlist, setwishlist] = useContext(WishlistContext);
+  const [wishlist, setWishlist] = useContext(WishlistContext);
 
   const addToWishlist = (currentBook) => {
     if (isBookAddedToWishlist(currentBook.id)) {
       window.alert("Oops...You already added that book to your wishlist!");
     } else {
-      setwishlist([...wishlist, currentBook]);
+      axios({
+        method: 'post',
+        url: 'https://localhost:5001/api/wishlist/',
+        data: {
+          id: currentBook.id,
+          authors: currentBook.authors ? currentBook.authors.map(author => {return {name: author.name}}) : [{name: "Unknown"}],
+          categories: currentBook.categories ? currentBook.categories.map(category => {return {name: category.name}}) : [{name: "Unknown"}],
+          title: currentBook.title,
+          description: currentBook.description,
+          pageCount: currentBook.pageCount,
+          rating: currentBook.rating,
+          ratingCount: currentBook.ratingCount,
+          language: currentBook.language,
+          maturityRating: currentBook.maturityRating,
+          published: currentBook.published,
+          publisher: currentBook.publisher,
+          thumbnail: currentBook.thumbnail,
+          subtitle: currentBook.subtitle
+        }
+      });
+      setWishlist([...wishlist, currentBook])
     }
   };
 
