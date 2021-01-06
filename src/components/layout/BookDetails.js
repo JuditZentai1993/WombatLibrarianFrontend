@@ -28,7 +28,6 @@ export default function BookDetails() {
     if (isBookAddedToBookshelf(currentBook.id)) {
       window.alert("Oops...You already added that book to your bookshelf!");
     } else {
-      // console.log(currentBook);
       axios({
         method: 'post',
         url: 'https://localhost:5001/api/bookshelf/',
@@ -49,11 +48,12 @@ export default function BookDetails() {
           subtitle: currentBook.subtitle
         }
       });
+      setBookshelf([...bookshelf, currentBook])
     }
   };
 
   const isBookAddedToBookshelf = (id) => {
-    let bookOnShelf = bookshelf.filter((book) => book.id === id);
+    let bookOnShelf = bookshelf.filter(book => book.id === id);
     return bookOnShelf.length > 0;
   };
 
@@ -61,14 +61,13 @@ export default function BookDetails() {
 
   const createAuthorsDisplay = (props) => {
     let authors = bookDetails.state.book.authors;
-    console.log(authors);
     if (authors == null) return <p>(No authors information available)</p>
     let authorDisplay = [];
     for (let author of authors) {
     authorDisplay.push(<span><Link className="author-link" to={{pathname: "/authordetails/" + author.name.replaceAll(" ", "+"), state : author.name.replaceAll(" ", "+")}} >{author.name}</Link></span>)
     if (author.name !== authors[authors.length - 1].name) {
       authorDisplay.push(<span>, </span>)
-    }
+      }
     }
     return authorDisplay
   }
