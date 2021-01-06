@@ -1,13 +1,18 @@
 import React, { useContext } from "react";
 import { BookshelfContext } from "../../contexts/BookshelfContext";
 import BookCard from "../BookCard";
+import axios from "axios";
 import wombat from "../../images/wombat1.jpg";
 
 const Bookshelf = () => {
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
 
   const removeFromBookShelf = (id) => {
-    setBookshelf(bookshelf.filter(book => book.id !== id))
+    axios
+    .delete("https://localhost:5001/api/bookshelf/" + id)
+    .then(() => {
+      setBookshelf([...bookshelf.filter(book => book.id !== id)])
+    })
   }
 
   return (
@@ -15,7 +20,7 @@ const Bookshelf = () => {
       {
       bookshelf.length > 0 ? 
         (<div className="card-container">
-          {bookshelf[0].map((book) => (
+          {bookshelf.map((book) => (
             <div className="card-with-button">
             <BookCard book={book} key={book.id} />
             <button onClick={() => removeFromBookShelf(book.id)}>Remove</button>
