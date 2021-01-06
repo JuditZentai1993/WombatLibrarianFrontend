@@ -5,6 +5,7 @@ import BookCard from "../BookCard";
 import wombutt from "../../images/wombutt.jpg";
 import wombatLoading from "../../images/wombat_chewing.gif";
 
+
 export default function SearchResult(props) {
   const { searchTerm } = useParams();
   const [books, setBooks] = useState([]);
@@ -29,6 +30,9 @@ export default function SearchResult(props) {
     fetchBooks();
   }, [searchTerm]);
 
+  let searchInput = document.getElementById('searchForm');
+  searchInput.value = "";
+  
   return (
     <div>
       {isLoading ? (

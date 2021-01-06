@@ -7,12 +7,10 @@ import 'react-rater/lib/react-rater.css'
 export default function BookCard(props) {
   const createAuthorsDisplay = () => {
     const authors = props.book.authors;
-    console.log(authors);
     if (authors == null) return ""
     else {
       let authorsToDisplay = "";
       for (let author of authors) {
-        console.log(author.name);
         authorsToDisplay += author.name + ", "
       }
       authorsToDisplay = authorsToDisplay.slice(0, (authorsToDisplay.length - 2));

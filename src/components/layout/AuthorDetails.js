@@ -31,7 +31,7 @@ export default function AuthorDetails(props) {
     .then(response => {
       try {
         if (totalItems === 0) setTotalItems(response.data.totalItems);
-        setAuthorDetailsFromGoogle([...authorDetailsFromGoogle, ...response.data.items]);
+        setAuthorDetailsFromGoogle([...authorDetailsFromGoogle, ...response.data]);
         setStartIndex(startIndex + maxResultsPerRequest);
       } catch {
         setHasMoreData(false)
