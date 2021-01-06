@@ -3,7 +3,6 @@ import { BookshelfContext } from "../../contexts/BookshelfContext";
 import BookCard from "../BookCard";
 import axios from "axios";
 import wombat from "../../images/wombat1.jpg";
-import axios from "axios";
 
 const Bookshelf = () => {
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
@@ -20,7 +19,7 @@ const Bookshelf = () => {
     <div>
       {bookshelf.length > 0 ? (
         <div className="card-container">
-          {bookshelf[0].map((book) => (
+          {bookshelf.map((book) => (
             <div className="card-with-button">
               <BookCard book={book} key={book.id} />
               <button onClick={() => removeFromBookShelf(book.id)}>
