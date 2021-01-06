@@ -1,4 +1,4 @@
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import { BookshelfContext } from "../../contexts/BookshelfContext"
 import { Redirect, Link } from "react-router-dom";
 import "../../style/Navbar.css";
@@ -26,6 +26,7 @@ export default function Navbar() {
       })
   }
 
+
   return (
     <div className="navbar">
       <ul>
@@ -46,6 +47,7 @@ export default function Navbar() {
           )}
           <form onSubmit={handleSubmit}>
             <input
+              id = "searchForm"
               type="text"
               placeholder="Search..."
               value={searchTerm}
