@@ -11,7 +11,6 @@ export default function BookCard(props) {
     else {
       let authorsToDisplay = "";
       for (let author of authors) {
-        console.log(author.name);
         authorsToDisplay += author.name + ", "
       }
       authorsToDisplay = authorsToDisplay.slice(0, (authorsToDisplay.length - 2));

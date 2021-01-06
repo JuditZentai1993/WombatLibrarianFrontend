@@ -35,13 +35,14 @@ export default function Navbar() {
           )}
           <form onSubmit={handleSubmit}>
             <input
+              id = "searchForm"
               type="text"
               placeholder="Search..."
               value={searchTerm}
               onChange={handleChange}
               minLength="3"
             />
-            <button type="submit" className="fa fa-search">
+            <button type="submit" disabled={searchTerm === ""} className="fa fa-search">
               Search
             </button>
           </form>
