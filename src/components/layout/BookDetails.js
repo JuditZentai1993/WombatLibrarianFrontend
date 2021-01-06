@@ -28,7 +28,7 @@ export default function BookDetails() {
     if (isBookAddedToBookshelf(currentBook.id)) {
       window.alert("Oops...You already added that book to your bookshelf!");
     } else {
-      console.log(currentBook);
+      // console.log(currentBook);
       axios({
         method: 'post',
         url: 'https://localhost:5001/api/bookshelf/',
