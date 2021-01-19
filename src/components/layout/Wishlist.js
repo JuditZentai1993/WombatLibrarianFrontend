@@ -9,7 +9,7 @@ import wombat from "../../images/wombat1.jpg";
 
   const removeFromWishlist = (id) => {
     axios
-    .delete("https://localhost:5001/api/wishlist/" + id)
+    .delete("https://localhost:5001/api/wishlists/" + id)
     .then(() => {
       setWishlist([...wishlist.filter(book => book.id !== id)])
     })

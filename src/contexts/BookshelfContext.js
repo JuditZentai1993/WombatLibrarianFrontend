@@ -8,7 +8,7 @@ export const BookshelfProvider = (props) => {
 
     useEffect(() => {
         axios
-        .get("https://localhost:5001/api/bookshelf/")
+        .get("https://localhost:5001/api/bookshelves/")
         .then(response => { 
           setBookshelf([...response.data]);
         })

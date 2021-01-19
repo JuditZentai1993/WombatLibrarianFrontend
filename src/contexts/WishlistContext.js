@@ -9,7 +9,7 @@ export const WishlistProvider = (props) => {
   
   useEffect(() => {
     axios
-    .get("https://localhost:5001/api/wishlist/")
+    .get("https://localhost:5001/api/wishlists/")
     .then(response => { 
       setWishlist([...response.data]);
     })
