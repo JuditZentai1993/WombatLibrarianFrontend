@@ -7,11 +7,12 @@ import wombat from "../../images/wombat1.jpg";
 const Bookshelf = () => {
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
 
-  const removeFromBookShelf = (id) => {
+  const removeFromBookShelf = (book) => {
+    console.log(book)
     axios
-    .delete("https://localhost:5001/api/bookshelf/" + id)
+    .delete("https://localhost:5001/api/bookshelves/" + book.bookshelfId)
     .then(() => {
-      setBookshelf([...bookshelf.filter(book => book.id !== id)])
+      setBookshelf([...bookshelf.filter(item => item.id !== book.id)])
     })
   }
 
@@ -22,7 +23,7 @@ const Bookshelf = () => {
           {bookshelf.map((book) => (
             <div className="card-with-button">
               <BookCard book={book} key={book.id} />
-              <button onClick={() => removeFromBookShelf(book.id)}>
+              <button onClick={() => removeFromBookShelf(book)}>
                 Remove
               </button>
             </div>
