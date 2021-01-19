@@ -17,7 +17,7 @@ export default function BookDetails() {
     } else {
       axios({
         method: 'post',
-        url: 'https://localhost:5001/api/wishlist/',
+        url: 'https://localhost:5001/api/wishlists/',
         data: {
           id: currentBook.id,
           authors: currentBook.authors ? currentBook.authors.map(author => {return {name: author.name}}) : [{name: "Unknown"}],
@@ -50,7 +50,7 @@ export default function BookDetails() {
     } else {
       axios({
         method: 'post',
-        url: 'https://localhost:5001/api/bookshelf/',
+        url: 'https://localhost:5001/api/bookshelves/',
         data: {
           id: currentBook.id,
           authors: currentBook.authors ? currentBook.authors.map(author => {return {name: author.name}}) : [{name: "Unknown"}],
@@ -67,7 +67,8 @@ export default function BookDetails() {
           thumbnail: currentBook.thumbnail,
           subtitle: currentBook.subtitle
         }
-      });
+      })
+      .then(response => currentBook.bookshelfId = response.data.id);
       setBookshelf([...bookshelf, currentBook])
     }
   };
