@@ -35,7 +35,7 @@ export default function BookDetails() {
           subtitle: currentBook.subtitle
         }
       })
-      .then(response => currentBook.bookshelfId = response.data.id);
+      .then(response => currentBook.wishlistId = response.data.id);
       setWishlist([...wishlist, currentBook])
     }
   };
