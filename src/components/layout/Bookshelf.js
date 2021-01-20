@@ -8,7 +8,6 @@ const Bookshelf = () => {
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
 
   const removeFromBookShelf = (book) => {
-    console.log(book)
     axios
     .delete("https://localhost:5001/api/bookshelves/" + book.bookshelfId)
     .then(() => {
