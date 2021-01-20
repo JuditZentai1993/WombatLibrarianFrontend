@@ -34,7 +34,8 @@ export default function BookDetails() {
           thumbnail: currentBook.thumbnail,
           subtitle: currentBook.subtitle
         }
-      });
+      })
+      .then(response => currentBook.bookshelfId = response.data.id);
       setWishlist([...wishlist, currentBook])
     }
   };
