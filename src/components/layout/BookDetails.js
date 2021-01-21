@@ -9,28 +9,15 @@ import "../../style/Button.scss";
 
 export default function BookDetails() {
   const [bookshelf, setBookshelf] = useContext(BookshelfContext);
-  const [wishlist, setwishlist] = useContext(WishlistContext);
+  const [wishlist, setWishlist] = useContext(WishlistContext);
 
   const addToWishlist = (currentBook) => {
     if (isBookAddedToWishlist(currentBook.id)) {
       window.alert("Oops...You already added that book to your wishlist!");
     } else {
-      setwishlist([...wishlist, currentBook]);
-    }
-  };
-
-  const isBookAddedToWishlist = (id) => {
-    let bookOnWishlist = wishlist.filter((book) => book.id === id);
-    return bookOnWishlist.length > 0;
-  };
-
-  const addToBookshelf = (currentBook) => {
-    if (isBookAddedToBookshelf(currentBook.id)) {
-      window.alert("Oops...You already added that book to your bookshelf!");
-    } else {
       axios({
         method: 'post',
-        url: 'https://localhost:5001/api/bookshelf/',
+        url: 'https://localhost:5001/api/wishlists/',
         data: {
           id: currentBook.id,
           authors: currentBook.authors ? currentBook.authors.map(author => {return {name: author.name}}) : [{name: "Unknown"}],
@@ -47,7 +34,42 @@ export default function BookDetails() {
           thumbnail: currentBook.thumbnail,
           subtitle: currentBook.subtitle
         }
-      });
+      })
+      .then(response => currentBook.wishlistId = response.data.id);
+      setWishlist([...wishlist, currentBook])
+    }
+  };
+
+  const isBookAddedToWishlist = (id) => {
+    let bookOnWishlist = wishlist.filter((book) => book.id === id);
+    return bookOnWishlist.length > 0;
+  };
+
+  const addToBookshelf = (currentBook) => {
+    if (isBookAddedToBookshelf(currentBook.id)) {
+      window.alert("Oops...You already added that book to your bookshelf!");
+    } else {
+      axios({
+        method: 'post',
+        url: 'https://localhost:5001/api/bookshelves/',
+        data: {
+          id: currentBook.id,
+          authors: currentBook.authors ? currentBook.authors.map(author => {return {name: author.name}}) : [{name: "Unknown"}],
+          categories: currentBook.categories ? currentBook.categories.map(category => {return {name: category.name}}) : [{name: "Unknown"}],
+          title: currentBook.title,
+          description: currentBook.description,
+          pageCount: currentBook.pageCount,
+          rating: currentBook.rating,
+          ratingCount: currentBook.ratingCount,
+          language: currentBook.language,
+          maturityRating: currentBook.maturityRating,
+          published: currentBook.published,
+          publisher: currentBook.publisher,
+          thumbnail: currentBook.thumbnail,
+          subtitle: currentBook.subtitle
+        }
+      })
+      .then(response => currentBook.bookshelfId = response.data.id);
       setBookshelf([...bookshelf, currentBook])
     }
   };

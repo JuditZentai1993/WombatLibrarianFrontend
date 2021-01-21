@@ -1,13 +1,18 @@
 import React, { useContext } from "react";
 import { WishlistContext } from "../../contexts/WishlistContext";
 import BookCard from "../BookCard";
+import axios from "axios";
 import wombat from "../../images/wombat1.jpg";
 
   const Wishlist = () => {
     const [wishlist, setWishlist] = useContext(WishlistContext);
 
-  const removeFromWishlist = (id) => {
-    setWishlist(wishlist.filter(book => book.id !== id))
+  const removeFromWishlist = (book) => {
+    axios
+    .delete("https://localhost:5001/api/wishlists/" + book.wishlistId)
+    .then(() => {
+      setWishlist([...wishlist.filter(item => item.id !== book.id)])
+    })
   }
 
   return (
@@ -18,7 +23,7 @@ import wombat from "../../images/wombat1.jpg";
           {wishlist.map((book) => (
             <div className="card-with-button">
             <BookCard book={book} key={book.id} />
-            <button onClick={() => removeFromWishlist(book.id)}> Remove </button>
+            <button onClick={() => removeFromWishlist(book)}> Remove </button>
             </div>
         ))}
       </div>) : (<div>
