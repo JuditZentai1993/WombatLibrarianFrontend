@@ -39,9 +39,9 @@ How our wishlist looks without adding any books to it:
    Backend repository can be found here: https://github.com/Dusernajder/WombatLibrarianApi
    We recommend setting up the backend first, and coming back for the frontend part after that, but it works flawlessly both ways.
 2. Open the frontend repository in your favorite IDE or editor, or just open the project folder in a command line tool.
-3. If you don't have node package manager installed, now is the perfect time to install it with this command line command:
+3. Install package dependencies with this cli command:
 ### `npm install`
-4. After npm is surely and safely installed, hit
+4. After the dependencies are installed, hit
 ### `npm start`
 to access the frontend.
 
