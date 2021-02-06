@@ -107,7 +107,7 @@ export default function BookDetails() {
             Categories: 
             {bookDetails.state.book.volumeInfo.categories ? (
               bookDetails.state.book.volumeInfo.categories.map((category) => (
-                <b key={category.id + category.name}>{category.name}</b>
+                <b key={category.id + category}>{category}</b>
               ))
             ) : (
               <b>Unknown</b>
