@@ -59,14 +59,14 @@ let titlesToDisplay = createtitlesDisplay();
         <p className="card-book-name">{titlesToDisplay}</p>
         <p className="card-book-author">{authorsToDisplay}</p>
         <p className="card-book-page">
-          {typeof props.book.volumeInfo.pageCount !== "undefined" ? (
+          {props.book.volumeInfo.pageCount ? (
             <p>
               {props.book.volumeInfo.pageCount} pages
             </p>
           ) : null}
         </p>
         <p className="card-book-rating">
-          {typeof props.book.volumeInfo.ratingsCount !== "undefined" ? (
+          {props.book.volumeInfo.ratingsCount ? (
             <p>
               <Rater total={5} rating={props.book.volumeInfo.averageRating} interactive={false} /> ({props.book.volumeInfo.ratingsCount})
             </p>
