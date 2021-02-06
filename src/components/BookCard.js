@@ -6,12 +6,12 @@ import 'react-rater/lib/react-rater.css'
 
 export default function BookCard(props) {
   const createAuthorsDisplay = () => {
-    const authors = props.book.authors;
+    const authors = props.book.volumeInfo.authors;
     if (authors == null) return ""
     else {
       let authorsToDisplay = "";
       for (let author of authors) {
-        authorsToDisplay += author.name + ", "
+        authorsToDisplay += author + ", "
       }
       authorsToDisplay = authorsToDisplay.slice(0, (authorsToDisplay.length - 2));
       const authorDisplayLimit = 42
@@ -22,7 +22,7 @@ export default function BookCard(props) {
   let authorsToDisplay = createAuthorsDisplay();
 
   const createtitlesDisplay = () => {
-  const titles = props.book.title;
+  const titles = props.book.volumeInfo.title;
   if (titles === undefined) return ""
   else {
     let titlesToDisplay = "";
@@ -42,10 +42,10 @@ let titlesToDisplay = createtitlesDisplay();
       style: { textDecoration: 'none' }
     }}>
       <div className="card">
-        {props.book.thumbnail != null ? (
+        {props.book.volumeInfo.imageLinks != null ? (
           <img
-            src={props.book.thumbnail}
-            alt={props.book.title}
+            src={props.book.volumeInfo.imageLinks.thumbnail}
+            alt={props.book.volumeInfo.title}
             className="book-thumbnail"
           />
         ) : (
@@ -59,16 +59,16 @@ let titlesToDisplay = createtitlesDisplay();
         <p className="card-book-name">{titlesToDisplay}</p>
         <p className="card-book-author">{authorsToDisplay}</p>
         <p className="card-book-page">
-          {typeof props.book.pageCount !== "undefined" ? (
+          {typeof props.book.volumeInfo.pageCount !== "undefined" ? (
             <p>
-              {props.book.pageCount} pages
+              {props.book.volumeInfo.pageCount} pages
             </p>
           ) : null}
         </p>
         <p className="card-book-rating">
-          {typeof props.book.ratingCount !== "undefined" ? (
+          {typeof props.book.volumeInfo.ratingsCount !== "undefined" ? (
             <p>
-              <Rater total={5} rating={props.book.rating} interactive={false} /> ({props.book.ratingCount})
+              <Rater total={5} rating={props.book.volumeInfo.averageRating} interactive={false} /> ({props.book.volumeInfo.ratingsCount})
             </p>
           ) : <p>
                 <Rater total={5} rating={0} interactive={false} /> (0) 
@@ -76,7 +76,7 @@ let titlesToDisplay = createtitlesDisplay();
           }
         </p>
         <p className="card-book-language">
-          Language: {props.book.language}
+          Language: {props.book.volumeInfo.language}
         </p>
         </div>
       </div>
