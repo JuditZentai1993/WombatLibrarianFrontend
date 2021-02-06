@@ -20,19 +20,19 @@ export default function BookDetails() {
         url: 'https://localhost:5001/api/wishlists/',
         data: {
           id: currentBook.id,
-          authors: currentBook.authors ? currentBook.authors.map(author => {return {name: author.name}}) : [{name: "Unknown"}],
-          categories: currentBook.categories ? currentBook.categories.map(category => {return {name: category.name}}) : [{name: "Unknown"}],
-          title: currentBook.title,
-          description: currentBook.description,
-          pageCount: currentBook.pageCount,
-          rating: currentBook.rating,
-          ratingCount: currentBook.ratingCount,
-          language: currentBook.language,
-          maturityRating: currentBook.maturityRating,
-          published: currentBook.published,
-          publisher: currentBook.publisher,
-          thumbnail: currentBook.thumbnail,
-          subtitle: currentBook.subtitle
+          authors: currentBook.volumeInfo.authors ? currentBook.volumeInfo.authors.map(author => {return {name: author}}) : [{name: "Unknown"}],
+          categories: currentBook.volumeInfo.categories ? currentBook.volumeInfo.categories.map(category => {return {name: category}}) : [{name: "Unknown"}],
+          title: currentBook.volumeInfo.title,
+          description: currentBook.volumeInfo.description,
+          pageCount: currentBook.volumeInfo.pageCount ? currentBook.volumeInfo.pageCount : 0,
+          rating: currentBook.volumeInfo.averageRating ? currentBook.volumeInfo.averageRating : 0,
+          ratingCount: currentBook.volumeInfo.ratingsCount ? currentBook.volumeInfo.ratingsCount : 0,
+          language: currentBook.volumeInfo.language,
+          maturityRating: currentBook.volumeInfo.maturityRating,
+          published: currentBook.volumeInfo.publishedDate,
+          publisher: currentBook.volumeInfo.publisher,
+          thumbnail: currentBook.volumeInfo.imageLinks.thumbnail,
+          subtitle: currentBook.volumeInfo.subtitle
         }
       })
       .then(response => currentBook.wishlistId = response.data.id);
@@ -54,19 +54,19 @@ export default function BookDetails() {
         url: 'https://localhost:5001/api/bookshelves/',
         data: {
           id: currentBook.id,
-          authors: currentBook.authors ? currentBook.authors.map(author => {return {name: author.name}}) : [{name: "Unknown"}],
-          categories: currentBook.categories ? currentBook.categories.map(category => {return {name: category.name}}) : [{name: "Unknown"}],
-          title: currentBook.title,
-          description: currentBook.description,
-          pageCount: currentBook.pageCount,
-          rating: currentBook.rating,
-          ratingCount: currentBook.ratingCount,
-          language: currentBook.language,
-          maturityRating: currentBook.maturityRating,
-          published: currentBook.published,
-          publisher: currentBook.publisher,
-          thumbnail: currentBook.thumbnail,
-          subtitle: currentBook.subtitle
+          authors: currentBook.volumeInfo.authors ? currentBook.volumeInfo.authors.map(author => {return {name: author}}) : [{name: "Unknown"}],
+          categories: currentBook.volumeInfo.categories ? currentBook.volumeInfo.categories.map(category => {return {name: category}}) : [{name: "Unknown"}],
+          title: currentBook.volumeInfo.title,
+          description: currentBook.volumeInfo.description,
+          pageCount: currentBook.volumeInfo.pageCount ? currentBook.volumeInfo.pageCount : 0,
+          rating: currentBook.volumeInfo.averageRating ? currentBook.volumeInfo.averageRating : 0,
+          ratingCount: currentBook.volumeInfo.ratingsCount ? currentBook.volumeInfo.ratingsCount : 0,
+          language: currentBook.volumeInfo.language,
+          maturityRating: currentBook.volumeInfo.maturityRating,
+          published: currentBook.volumeInfo.publishedDate,
+          publisher: currentBook.volumeInfo.publisher,
+          thumbnail: currentBook.volumeInfo.imageLinks.thumbnail,
+          subtitle: currentBook.volumeInfo.subtitle
         }
       })
       .then(response => currentBook.bookshelfId = response.data.id);
@@ -82,12 +82,12 @@ export default function BookDetails() {
   let bookDetails = useLocation();
 
   const createAuthorsDisplay = (props) => {
-    let authors = bookDetails.state.book.authors;
+    let authors = bookDetails.state.book.volumeInfo.authors;
     if (authors == null) return <p>(No authors information available)</p>
     let authorDisplay = [];
     for (let author of authors) {
-    authorDisplay.push(<span><Link className="author-link" to={{pathname: "/authordetails/" + author.name.replaceAll(" ", "+"), state : author.name.replaceAll(" ", "+")}} >{author.name}</Link></span>)
-    if (author.name !== authors[authors.length - 1].name) {
+    authorDisplay.push(<span><Link className="author-link" to={{pathname: "/authordetails/" + author.replaceAll(" ", "+"), state : author.replaceAll(" ", "+")}} >{author}</Link></span>)
+    if (author !== authors[authors.length - 1]) {
       authorDisplay.push(<span>, </span>)
       }
     }
@@ -98,15 +98,15 @@ export default function BookDetails() {
     <div className="book-details-container">
       <div className="book-details">
         <div className="detail-card">
-          <h1>{bookDetails.state.book.title}</h1>
+          <h1>{bookDetails.state.book.volumeInfo.title}</h1>
           <h2>
-            <i>- {bookDetails.state.book.subtitle}</i>
+            <i>- {bookDetails.state.book.volumeInfo.subtitle}</i>
           </h2>
           <h3>Written by {createAuthorsDisplay()}</h3>
           <div>
             Categories: 
-            {bookDetails.state.book.categories ? (
-              bookDetails.state.book.categories.map((category) => (
+            {bookDetails.state.book.volumeInfo.categories ? (
+              bookDetails.state.book.volumeInfo.categories.map((category) => (
                 <b key={category.id + category.name}>{category.name}</b>
               ))
             ) : (
@@ -115,30 +115,30 @@ export default function BookDetails() {
             
           </div>
           <div>
-            Language: <b>{bookDetails.state.book.language}</b>
+            Language: <b>{bookDetails.state.book.volumeInfo.language}</b>
           </div>
           <div>
             Maturity rating:{" "}
-            <b>{bookDetails.state.book.maturityRating}</b>
+            <b>{bookDetails.state.book.volumeInfo.maturityRating}</b>
           </div>
           <div>
             Published in{" "}
-            {bookDetails.state.book.published ? (
-              <b>{bookDetails.state.book.published}</b>
+            {bookDetails.state.book.volumeInfo.publishedDate ? (
+              <b>{bookDetails.state.book.volumeInfo.publishedDate}</b>
             ) : (
               <b>Unknown</b>
             )}
           </div>
           <div>
-            Publisher: <b>{bookDetails.state.book.publisher}</b>
+            Publisher: <b>{bookDetails.state.book.volumeInfo.publisher}</b>
           </div>
         </div>
         <div className="book-cover">
-          {bookDetails.state.book.thumbnail !==
+          {bookDetails.state.book.volumeInfo.imageLinks !==
           null ? (
             <img
-              src={bookDetails.state.book.thumbnail}
-              alt={bookDetails.state.book.title}
+              src={bookDetails.state.book.volumeInfo.imageLinks.thumbnail}
+              alt={bookDetails.state.book.volumeInfo.title}
             />
           ) : (
             <img src={imgNotFound} alt="not found" />
@@ -166,8 +166,8 @@ export default function BookDetails() {
 
       <div className="book-description">
         <hr />"
-        {typeof bookDetails.state.book.description !== "undefined"
-          ? bookDetails.state.book.description
+        {typeof bookDetails.state.book.volumeInfo.description !== "undefined"
+          ? bookDetails.state.book.volumeInfo.description
           : "No Description"}
         "
       </div>
