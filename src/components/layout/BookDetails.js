@@ -31,7 +31,7 @@ export default function BookDetails() {
           maturityRating: currentBook.volumeInfo.maturityRating,
           published: currentBook.volumeInfo.publishedDate,
           publisher: currentBook.volumeInfo.publisher,
-          thumbnail: currentBook.volumeInfo.imageLinks.thumbnail,
+          thumbnail: currentBook.volumeInfo.imageLinks? currentBook.volumeInfo.imageLinks.thumbnail : null,
           subtitle: currentBook.volumeInfo.subtitle
         }
       })
@@ -65,7 +65,7 @@ export default function BookDetails() {
           maturityRating: currentBook.volumeInfo.maturityRating,
           published: currentBook.volumeInfo.publishedDate,
           publisher: currentBook.volumeInfo.publisher,
-          thumbnail: currentBook.volumeInfo.imageLinks.thumbnail,
+          thumbnail: currentBook.volumeInfo.imageLinks? currentBook.volumeInfo.imageLinks.thumbnail : null,
           subtitle: currentBook.volumeInfo.subtitle
         }
       })
