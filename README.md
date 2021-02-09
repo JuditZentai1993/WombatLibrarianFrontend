@@ -3,7 +3,7 @@
 This is the frontend (built with React) part of our web-application made for book lovers, where people can browse books, keep track of what books they have and what books they want to read. The aim of the site to create a community where the users can trade, rate, and discuss books.
 To give you an idea, the aim is to make it similar to https://www.goodreads.com/, or the hungarian moly.hu (https://hu.wikipedia.org/wiki/Moly.hu)
 
-Backend repository can be found here: https://github.com/Dusernajder/WombatLibrarianApi
+Backend repository can be found here: https://github.com/JuditZentai1993/WombatLibrarianBackend
 
 ## Project Status
 
@@ -36,7 +36,7 @@ How our wishlist looks without adding any books to it:
 
 1. Clone this repository. You will need node and npm installed globally on your machine in order to run the frontend.
    You also have to clone the backend repository and follow the instruction in the readme file you can find there.
-   Backend repository can be found here: https://github.com/Dusernajder/WombatLibrarianApi
+   Backend repository can be found here: https://github.com/JuditZentai1993/WombatLibrarianBackend
    We recommend setting up the backend first, and coming back for the frontend part after that, but it works flawlessly both ways.
 2. Open the frontend repository in your favorite IDE or editor, or just open the project folder in a command line tool.
 3. Install package dependencies with this cli command:
