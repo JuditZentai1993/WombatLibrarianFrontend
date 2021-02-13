@@ -19,7 +19,7 @@ const Bookshelf = () => {
     <div>
       {bookshelf.length > 0 ? (
         <div className="card-container">
-          {bookshelf.map((book) => (
+          {bookshelf[0].map((book) => (
             <div className="card-with-button">
               <BookCard book={book} key={book.id} />
               <button onClick={() => removeFromBookShelf(book)}>
