@@ -17,8 +17,8 @@ const Bookshelf = () => {
 
   return (
     <div>
-      {bookshelf.length > 0 ? (
-        <div className="card-container">
+      {bookshelf.length > 0 ? 
+        (<div className="card-container">
           {bookshelf.map((book) => (
             <div className="card-with-button">
               <BookCard book={book} key={book.id} />
@@ -26,7 +26,7 @@ const Bookshelf = () => {
                 Remove
               </button>
             </div>
-          ))}
+        ))}
         </div>
       ) : (
         <div>
