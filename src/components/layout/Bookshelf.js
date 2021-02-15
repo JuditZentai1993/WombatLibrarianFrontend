@@ -9,7 +9,7 @@ const Bookshelf = () => {
 
   const removeFromBookShelf = (book) => {
     axios
-    .delete("https://localhost:5001/api/bookshelves/" + book.bookshelfId)
+    .delete("https://localhost:5001/api/bookshelves/" + book.bookshelfId + "/" + book.id)
     .then(() => {
       setBookshelf([...bookshelf.filter(item => item.id !== book.id)])
     })
@@ -19,7 +19,7 @@ const Bookshelf = () => {
     <div>
       {bookshelf.length > 0 ? (
         <div className="card-container">
-          {bookshelf[0].map((book) => (
+          {bookshelf.map((book) => (
             <div className="card-with-button">
               <BookCard book={book} key={book.id} />
               <button onClick={() => removeFromBookShelf(book)}>
