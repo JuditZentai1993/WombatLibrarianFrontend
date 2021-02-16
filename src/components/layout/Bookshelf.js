@@ -9,7 +9,7 @@ const Bookshelf = () => {
 
   const removeFromBookShelf = (book) => {
     axios
-    .delete("https://localhost:5001/api/bookshelves/" + book.bookshelfId + "/" + book.id)
+    .delete("https://localhost:5001/api/bookshelves/" + book.bookshelves[0].id + "/" + book.id)
     .then(() => {
       setBookshelf([...bookshelf.filter(item => item.id !== book.id)])
     })
