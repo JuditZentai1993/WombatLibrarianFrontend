@@ -6,12 +6,12 @@ import 'react-rater/lib/react-rater.css'
 
 export default function BookCard(props) {
   const createAuthorsDisplay = () => {
-    const authors = props.book.volumeInfo.authors;
+    const authors = props.book.authors;
     if (authors == null) return ""
     else {
       let authorsToDisplay = "";
       for (let author of authors) {
-        authorsToDisplay += author + ", "
+        authorsToDisplay += author.name + ", "
       }
       authorsToDisplay = authorsToDisplay.slice(0, (authorsToDisplay.length - 2));
       const authorDisplayLimit = 42
@@ -22,7 +22,7 @@ export default function BookCard(props) {
   let authorsToDisplay = createAuthorsDisplay();
 
   const createtitlesDisplay = () => {
-  const titles = props.book.volumeInfo.title;
+  const titles = props.book.title;
   if (titles === undefined) return ""
   else {
     let titlesToDisplay = "";
@@ -42,10 +42,10 @@ let titlesToDisplay = createtitlesDisplay();
       style: { textDecoration: 'none' }
     }}>
       <div className="card">
-        {props.book.volumeInfo.imageLinks != null ? (
+        {props.book.thumbnail != null ? (
           <img
-            src={props.book.volumeInfo.imageLinks.thumbnail}
-            alt={props.book.volumeInfo.title}
+            src={props.book.thumbnail}
+            alt={props.book.title}
             className="book-thumbnail"
           />
         ) : (
@@ -59,16 +59,16 @@ let titlesToDisplay = createtitlesDisplay();
         <p className="card-book-name">{titlesToDisplay}</p>
         <p className="card-book-author">{authorsToDisplay}</p>
         <p className="card-book-page">
-          {props.book.volumeInfo.pageCount ? (
+          {props.book.pageCount ? (
             <p>
-              {props.book.volumeInfo.pageCount} pages
+              {props.book.pageCount} pages
             </p>
           ) : null}
         </p>
         <p className="card-book-rating">
-          {props.book.volumeInfo.ratingsCount ? (
+          {props.book.ratingCount ? (
             <p>
-              <Rater total={5} rating={props.book.volumeInfo.averageRating} interactive={false} /> ({props.book.volumeInfo.ratingsCount})
+              <Rater total={5} rating={props.book.rating} interactive={false} /> ({props.book.ratingCount})
             </p>
           ) : <p>
                 <Rater total={5} rating={0} interactive={false} /> (0) 
@@ -76,7 +76,7 @@ let titlesToDisplay = createtitlesDisplay();
           }
         </p>
         <p className="card-book-language">
-          Language: {props.book.volumeInfo.language}
+          Language: {props.book.language}
         </p>
         </div>
       </div>
